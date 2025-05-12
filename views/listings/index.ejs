@@ -1,0 +1,81 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<body>
+  <div class="col-9 offset-1">
+  
+  <div class="filter-bar-wrapper overflow-auto px-3 py-2">
+    <div class="d-flex flex-nowrap align-items-center gap-3" style="min-width: max-content;">
+  
+      
+      <div class="filter text-center">
+        <i class="fas fa-fire"></i><br><small>Trending</small>
+      </div>
+      <div class="filter text-center">
+        <i class="fas fa-star"></i><br><small>Superhost</small>
+      </div>
+      <div class="filter text-center">
+        <i class="fas fa-door-open"></i><br><small>Rooms</small>
+      </div>
+      <div class="filter text-center">
+        <i class="fas fa-map-marker-alt"></i><br><small>Best Place</small>
+      </div>
+      <div class="filter text-center">
+        <i class="fas fa-mountain"></i><br><small>Mountained</small>
+      </div>
+      <div class="filter text-center">
+        <i class="fas fa-heart"></i><br><small>Top Rated</small>
+      </div>
+      <div class="filter text-center">
+        <i class="fas fa-tag"></i><br><small>Offers</small>
+      </div>
+  
+      
+      <div class=" tax-container d-flex align-items-center ms-auto">
+        <label for="taxToggle" class="me-2 mb-0">Display Taxes</label>
+        <label class="tax-toggle">
+          <input type="checkbox" id="taxToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+  
+    </div>
+  </div>
+  </div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 g-4">
+  <% for (let listing of allListings) { %>
+    <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+  <div class="card col listing-card" style="width: 20rem;">
+    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_img">
+    <div class="card-img-overlay"></div>
+    <div class="card-body">
+      <p class="card-text"> 
+        <b><%= listing.title %> </b><br>
+       &#8377;<%= listing.price.toLocaleString("en-IN")  %>/night 
+          <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+      </p>
+    </div>
+  </div>
+  </a>
+  <% } %>
+
+</div>
+
+<script>
+  // JavaScript to handle the toggle switch for displaying taxes
+  const taxToggle = document.getElementById('taxToggle');
+    taxToggle.addEventListener('change', function() {
+      const taxInfoElements = document.querySelectorAll('.tax-info');
+      taxInfoElements.forEach(function(taxInfo) {
+        if (this.checked) {
+          taxInfo.style.display = 'inline';
+        } else {
+          taxInfo.style.display = 'none';
+        }
+      }, this);
+    });
+ 
+</script>
+
+</body>
